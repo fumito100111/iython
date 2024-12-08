@@ -26,13 +26,13 @@
 ```
   git clone -b v0.1.0 https://github.com/su-ohkubo-lab/iython.git iython
   cd iython
-  . installer.sh
+  . ./installer.sh
 ```
 ### Linux
 ```
   git clone -b v0.1.0 https://github.com/su-ohkubo-lab/iython.git iython
   cd iython
-  . installer.sh
+  . ./installer.sh
 ```
 ## How to PATH
 ### Edit .bash_profile / .zshrc
