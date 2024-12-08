@@ -24,7 +24,7 @@
 ## How to Install
 ### macOS
 ```
-  git clone -b v.0.1.0 https://github.com/su-ohkubo-lab/iython.git iython
+  git clone -b v0.1.0 https://github.com/su-ohkubo-lab/iython.git iython
   cd iython
   (chmod 755 ./setup.sh)
   sh setup.sh (setup.sh に編集限限の付与が必要かも)
@@ -32,7 +32,7 @@
 ```
 ### Linux
 ```
-  git clone -b v.0.1.0 https://github.com/su-ohkubo-lab/iython.git iython
+  git clone -b v0.1.0 https://github.com/su-ohkubo-lab/iython.git iython
   cd iython
   (chmod 755 ./setup.sh)
   sh setup.sh (setup.sh に編集限限の付与が必要かも)
