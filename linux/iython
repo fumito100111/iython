@@ -59,21 +59,21 @@ if [ "$FILE" != "" ]; then
   done < $FILE
 
   SCRIPT="${SCRIPT}\
-  $(make_indent "$INDENT" 1)print('Iython')${NEWLINE_CODE}\
-  $(make_indent "$INDENT" 1)while True:${NEWLINE_CODE}\
-  $(make_indent "$INDENT" 2)__value__ = input('>>> ')${NEWLINE_CODE}\
-  $(make_indent "$INDENT" 2)if __value__ == 'exit()':${NEWLINE_CODE}\
-  $(make_indent "$INDENT" 3)break${NEWLINE_CODE}\
-  $(make_indent "$INDENT" 2)elif ' ' not in __value__ and '=' not in __value__ and '(' not in __value__:${NEWLINE_CODE}\
-  $(make_indent "$INDENT" 3)try:${NEWLINE_CODE}\
-  $(make_indent "$INDENT" 4)print(eval(__value__, globals(), locals()))${NEWLINE_CODE}\
-  $(make_indent "$INDENT" 3)except Exception as __exception__:${NEWLINE_CODE}\
-  $(make_indent "$INDENT" 4)print(__exception__)${NEWLINE_CODE}\
-  $(make_indent "$INDENT" 2)else:${NEWLINE_CODE}\
-  $(make_indent "$INDENT" 3)try:${NEWLINE_CODE}\
-  $(make_indent "$INDENT" 4)exec(__value__, globals(), locals())${NEWLINE_CODE}\
-  $(make_indent "$INDENT" 3)except Exception as __exception__:${NEWLINE_CODE}\
-  $(make_indent "$INDENT" 4)print(__exception__)"
+$(make_indent "$INDENT" 1)print('Iython')${NEWLINE_CODE}\
+$(make_indent "$INDENT" 1)while True:${NEWLINE_CODE}\
+$(make_indent "$INDENT" 2)__value__ = input('>>> ')${NEWLINE_CODE}\
+$(make_indent "$INDENT" 2)if __value__ == 'exit()':${NEWLINE_CODE}\
+$(make_indent "$INDENT" 3)break${NEWLINE_CODE}\
+$(make_indent "$INDENT" 2)elif ' ' not in __value__ and '=' not in __value__ and '(' not in __value__:${NEWLINE_CODE}\
+$(make_indent "$INDENT" 3)try:${NEWLINE_CODE}\
+$(make_indent "$INDENT" 4)print(eval(__value__, globals(), locals()))${NEWLINE_CODE}\
+$(make_indent "$INDENT" 3)except Exception as __exception__:${NEWLINE_CODE}\
+$(make_indent "$INDENT" 4)print(__exception__)${NEWLINE_CODE}\
+$(make_indent "$INDENT" 2)else:${NEWLINE_CODE}\
+$(make_indent "$INDENT" 3)try:${NEWLINE_CODE}\
+$(make_indent "$INDENT" 4)exec(__value__, globals(), locals())${NEWLINE_CODE}\
+$(make_indent "$INDENT" 3)except Exception as __exception__:${NEWLINE_CODE}\
+$(make_indent "$INDENT" 4)print(__exception__)"
 
   FILE="${FILE%.*}.iython"
   echo "$SCRIPT" > $FILE
