@@ -28,6 +28,7 @@
   cd iython
   chmod 755 ./setup.sh
   sh ./setup.sh
+  cd ..
 ```
 ### Linux
 ```
@@ -35,6 +36,7 @@
   cd iython
   chmod 755 ./setup.sh
   sh ./setup.sh
+  cd ..
 ```
 ## How to PATH
 ### Edit .bash_profile / .zshrc
