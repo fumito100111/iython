@@ -26,16 +26,13 @@
 ```
   git clone -b v0.1.0 https://github.com/su-ohkubo-lab/iython.git iython
   cd iython
-  chmod 755 ./setup.sh
-  ./setup.sh
-  cd ..
+  . installer.sh
 ```
 ### Linux
 ```
   git clone -b v0.1.0 https://github.com/su-ohkubo-lab/iython.git iython
   cd iython
-  chmod 755 ./setup.sh
-  ./setup.sh
+  . installer.sh
   cd ..
 ```
 ## How to PATH
