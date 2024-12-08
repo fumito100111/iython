@@ -44,7 +44,7 @@
 # >>> iython
 
 export PATH=$PATH:$HOME/bin/.iython
-chmod 755 $HOME/bin/.iython/iython
+chmod 755 $HOME/bin/.iython/iython # As needed
 
 # <<< iython
 ```
