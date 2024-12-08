@@ -73,7 +73,7 @@ def add(x, value):
 ```
 #### How to run
 ```
-  ipython example.py [ -i (2 or 4) ] [ -e PATH ]
+  iython example.py [ -i (2 or 4) ] [ -e PATH ]
 ```
 #### Result
 ```
