@@ -44,41 +44,43 @@ do
   shift
 done
 
-if [ ! -e $FILE ]; then
-  echo "'${FILE}' is not exist"
+if [ "$FILE" != "" ]; then
+  make_indent() {
+    indent=$1
+    n=$2
+    echo "$(yes "$indent" | head -n $n | tr -d ${NEWLINE_CODE})"
+  }
+
+  INDENT=$(echo "$(make_indent " " $INDENT)")
+  SCRIPT="if __name__ == '__main__':${NEWLINE_CODE}"
+  while IFS= read LINE || [ -n "${LINE}" ]
+  do
+    SCRIPT="${SCRIPT}$(make_indent "$INDENT" 1)${LINE}${NEWLINE_CODE}"
+  done < $FILE
+
+  SCRIPT="${SCRIPT}\
+  $(make_indent "$INDENT" 1)print('Iython')${NEWLINE_CODE}\
+  $(make_indent "$INDENT" 1)while True:${NEWLINE_CODE}\
+  $(make_indent "$INDENT" 2)__value__ = input('>>> ')${NEWLINE_CODE}\
+  $(make_indent "$INDENT" 2)if __value__ == 'exit()':${NEWLINE_CODE}\
+  $(make_indent "$INDENT" 3)break${NEWLINE_CODE}\
+  $(make_indent "$INDENT" 2)elif ' ' not in __value__ and '=' not in __value__ and '(' not in __value__:${NEWLINE_CODE}\
+  $(make_indent "$INDENT" 3)try:${NEWLINE_CODE}\
+  $(make_indent "$INDENT" 4)print(eval(__value__, globals(), locals()))${NEWLINE_CODE}\
+  $(make_indent "$INDENT" 3)except Exception as __exception__:${NEWLINE_CODE}\
+  $(make_indent "$INDENT" 4)print(__exception__)${NEWLINE_CODE}\
+  $(make_indent "$INDENT" 2)else:${NEWLINE_CODE}\
+  $(make_indent "$INDENT" 3)try:${NEWLINE_CODE}\
+  $(make_indent "$INDENT" 4)exec(__value__, globals(), locals())${NEWLINE_CODE}\
+  $(make_indent "$INDENT" 3)except Exception as __exception__:${NEWLINE_CODE}\
+  $(make_indent "$INDENT" 4)print(__exception__)"
+
+  FILE="${FILE%.*}.iython"
+  echo "$SCRIPT" > $FILE
+  $PYTHON $FILE
+  exit 0
+
+else
+  echo "missing argument 'FILE'"
   exit 1
 fi
-
-make_indent() {
-  indent=$1
-  n=$2
-  echo "$(yes "$indent" | head -n $n | tr -d ${NEWLINE_CODE})"
-}
-
-INDENT=$(echo "$(make_indent " " $INDENT)")
-SCRIPT="if __name__ == '__main__':${NEWLINE_CODE}"
-while IFS= read LINE || [ -n "${LINE}" ]
-do
-  SCRIPT="${SCRIPT}$(make_indent "$INDENT" 1)${LINE}${NEWLINE_CODE}"
-done < $FILE
-
-SCRIPT="${SCRIPT}\
-$(make_indent "$INDENT" 1)print('Iython')${NEWLINE_CODE}\
-$(make_indent "$INDENT" 1)while True:${NEWLINE_CODE}\
-$(make_indent "$INDENT" 2)__value__ = input('>>> ')${NEWLINE_CODE}\
-$(make_indent "$INDENT" 2)if __value__ == 'exit()':${NEWLINE_CODE}\
-$(make_indent "$INDENT" 3)break${NEWLINE_CODE}\
-$(make_indent "$INDENT" 2)elif ' ' not in __value__ and '=' not in __value__ and '(' not in __value__:${NEWLINE_CODE}\
-$(make_indent "$INDENT" 3)try:${NEWLINE_CODE}\
-$(make_indent "$INDENT" 4)print(eval(__value__, globals(), locals()))${NEWLINE_CODE}\
-$(make_indent "$INDENT" 3)except Exception as __exception__:${NEWLINE_CODE}\
-$(make_indent "$INDENT" 4)print(__exception__)${NEWLINE_CODE}\
-$(make_indent "$INDENT" 2)else:${NEWLINE_CODE}\
-$(make_indent "$INDENT" 3)try:${NEWLINE_CODE}\
-$(make_indent "$INDENT" 4)exec(__value__, globals(), locals())${NEWLINE_CODE}\
-$(make_indent "$INDENT" 3)except Exception as __exception__:${NEWLINE_CODE}\
-$(make_indent "$INDENT" 4)print(__exception__)"
-
-FILE="${FILE%.*}.iython"
-echo "$SCRIPT" > $FILE
-$PYTHON $FILE
