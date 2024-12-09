@@ -2,11 +2,24 @@
 PYTHON=$(which python3)
 INDENT=4
 NEWLINE_CODE='\n'
+VERSION="0.1.0"
 FILE=""
+if [ $# -eq 1 ]; then
+  case $1 in
+    -V | --version)
+      echo Iython $VERSION
+      exit 0
+    ;;
+    -E | --env)
+      echo Python: $PYTHON
+      exit 0
+    ;;    
+  esac
+fi
 while (( $# > 0 ))
 do
   case $1 in
-    -e)
+    -E | --env)
       ENVIRONMENTS=$(where python3)
       if echo "${ENVIRONMENTS[@]}" | grep -qw $2; then
         PYTHON=$2
@@ -16,7 +29,7 @@ do
       fi
       shift
       ;;
-    -i)
+    -I | --indent)
       if [[ "$2" = "2" || "$2" = "4" ]]; then
         INDENT=$2
       else
