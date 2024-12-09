@@ -56,8 +56,10 @@ chmod 755 $HOME/bin/.iython/iython  # As needed
 ## How to Use
 ### Options
 ```
-  -e : Path for Python execution environment (e.g. /usr/~/bin/python3  default: Path given by command 'which python3')
-  -i : Indentation number of characters (2 or 4  default: 4)
+  -V | --version         : Check Iython version
+  -E | --env             : Check path for Python execution environment
+  -E | --env (PATH)      : Path for Python execution environment (e.g. /usr/~/bin/python3  default: Path given by command 'which python3')
+  -I | --indent (2 or 4) : Indentation number of characters (2 or 4  default: 4)
 ```
 ### Example
 #### example.py
