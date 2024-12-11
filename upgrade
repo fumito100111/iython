@@ -1,0 +1,47 @@
+#!/bin/sh
+
+if [ $# = 0 ]; then
+  git clone --no-checkout $(cat HOME/bin/.iython/.repo) iython # デバッグ
+  # git clone --no-checkout $(cat $(dirname $(which iython))/.repo) iython # 本番環境
+  cd iython
+  git checkout $(git describe --tags --abbrev=0)
+  echo -n $(git describe --tags --abbrev=0) > ../HOME/bin/.iython/.version # デバッグ
+  # echo -n $(git describe --tags --abbrev=0) > $(dirname $(which iython))/.version # 本番環境
+
+elif [ $# = 1 ]; then
+  VERSION=$1
+  git clone --no-checkout $(cat HOME/bin/.iython/.repo) iython # デバッグ
+  # git clone --no-checkout $(cat $(dirname $(which iython))/.repo) iython # 本番環境
+  cd iython
+  TAGS=$(git tag)
+  echo $TAGS
+  if echo ${TAGS[@]} | grep -qw $VERSION; then
+    echo $VERSION
+  else
+    echo "'${VERSION}' is not found"
+    cd ..
+    rm -rf iython
+    exit 1
+  fi
+
+#   if printf "%s\n" "${TAGS[@]}" | grep -q $VERSION; then
+# #   if echo "${TAGS[@]}" | grep -q "$VERSION"; then
+#     echo "'${VERSION}' is found"
+#     exit 0
+#   else
+#     echo "'${VERSION}' is not found"
+#     exit 1
+#   fi
+fi
+
+
+cd ..
+rm -rf iython
+
+# echo $(cat HOME/bin/.iython/.repo)
+
+# git clone --no-checkout <リ>ポジトリのURL iython
+# cd iython
+# git checkout $(git describe --tags --abbrev=0)
+
+# echo $(git branch --contains)

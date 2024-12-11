@@ -1,0 +1,18 @@
+#!/bin/sh
+
+if [ $# = 0 ]; then
+  git clone --no-checkout $(cat HOME/bin/.iython/.repo) iython # デバッグ
+  # git clone --no-checkout $(cat $(dirname $(which iython))/.repo) iython # 本番環境
+  cd iython
+  git checkout $(git describe --tags --abbrev=0)
+  echo -n $(git describe --tags --abbrev=0) > ../HOME/bin/.iython/.version # デバッグ
+  # echo -n $(git describe --tags --abbrev=0) > $(dirname $(which iython))/.version # 本番環境
+  echo -n $(git describe --tags --abbrev=0) > ../HOME/bin/.iython/.version # デバッグ
+  # echo -n $(git describe --tags --abbrev=0) > $(dirname $(which iython))/.version # 本番環境
+  cd ..
+  rm -rf iython
+
+else
+  echo "too many arguments"
+  exit 1
+fi
