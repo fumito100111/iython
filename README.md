@@ -90,4 +90,4 @@ None
 ```
 
 
-[link]./example.py
+[link](./example.py)
