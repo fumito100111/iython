@@ -24,13 +24,13 @@
 ## How to Install
 ### macOS
 ```
-  git clone -b v0.1.0 https://github.com/fumito100111/iython.git iython
+  git clone -b v0.4.0 https://github.com/fumito100111/iython.git iython
   cd iython
   source installer
 ```
 ### Linux
 ```
-  git clone -b v0.1.0 https://github.com/fumito100111/iython.git iython
+  git clone -b v0.4.0 https://github.com/fumito100111/iython.git iython
   cd iython
   source installer
 ```
